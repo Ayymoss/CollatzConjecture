@@ -4,7 +4,6 @@ internal static class CollatzConjecture
 {
     private static void Main()
     {
-        // 75,128,138,247 - 1,229 (Highest number I've found) (100000000000)
         var index = 0;
         var indexValueHighStore = 0;
         long valueHighStore = 0;
