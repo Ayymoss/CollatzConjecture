@@ -13,8 +13,8 @@ internal static class CollatzConjecture
         Parallel.For(1, 100000000000, value =>
         {
             var collatzLogic = CollatzLogic(value);
-            if (collatzLogic[0] <= 1100) return;
-            Console.WriteLine("\nIndex: {0:N0}\n - Value: \t{1:N0}\n - Value High: \t{2:N0}\n - Tree Size: \t{3:N0}",
+            if (collatzLogic[0] <= 1000) return;
+            Console.WriteLine("\nIndex: {0:N0}\n - Value: \t\t{1:N0}\n - Value Range: \t{2:N0}\n - Tree Size: \t\t{3:N0}",
                 index, value, collatzLogic[1], collatzLogic[0]);
 
             if (value > valueHighStore)
@@ -32,17 +32,18 @@ internal static class CollatzConjecture
             index++;
         });
         Console.WriteLine("\nComplete...\n");
-        Console.WriteLine("Index ID: {0} - Highest Tree: {1}", indexTreeSizeStore, treeSizeStore);
-        Console.WriteLine("Index ID: {0} - Highest Value High: {1}", indexValueHighStore, valueHighStore);
+        Console.WriteLine("Index ID: {0:N0} - Highest Tree: {1:N0}", indexTreeSizeStore, treeSizeStore);
+        Console.WriteLine("Index ID: {0:N0} - Highest Value High: {1:N0}", indexValueHighStore, valueHighStore);
     }
 
     private static long[] CollatzLogic(long value)
     {
         var treeLength = 1;
-        var valueHigh = value;
+        var valueStart = value;
+        var valueRange = value;
         while (value > 1)
         {
-            if (value > valueHigh) valueHigh = value;
+            if (value > valueRange) valueRange = value;
 
             if (value % 2 != 0)
             {
@@ -56,6 +57,7 @@ internal static class CollatzConjecture
             }
         }
 
-        return new[] {treeLength, valueHigh};
+        valueRange -= valueStart;
+        return new[] {treeLength, valueRange};
     }
 }
